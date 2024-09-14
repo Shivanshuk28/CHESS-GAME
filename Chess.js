@@ -1,3 +1,57 @@
+const player1 = localStorage.getItem('player1');
+const player2 = localStorage.getItem('player2');
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    let tog = 1; // Initialize the toggle variable
+
+    // Function to update the turn indicator
+    function updateTurnIndicator() {
+        const currentPlayer = tog % 2 !== 0 ? player1 : player2;
+        document.getElementById('tog').innerText = `${currentPlayer}'s Turn`;
+    }
+
+    // Initial setup
+    updateTurnIndicator();
+    // // Initialize players and ratings
+    function initializePlayer(player) {
+        let players = JSON.parse(localStorage.getItem('players')) || {};
+        if (!players[player]) {
+            players[player] = { rating: 400 }; // Initial rating
+        }
+        localStorage.setItem('players', JSON.stringify(players));
+        
+    }
+    initializePlayer(player1);
+    initializePlayer(player2);
+    
+});
+
+
+
+
+
+//update ratings when you win
+
+function updateRatings(winner, loser) {
+    let players = JSON.parse(localStorage.getItem('players')) || {};
+
+    // Debugging statements
+    console.log('Players before update:', players);
+    console.log('Winner:', winner, 'Loser:', loser);
+
+    if (players[winner] && players[loser]) {
+        players[winner].rating += 100; // Increase winner's rating
+        players[loser].rating -= 100; // Decrease loser's rating
+
+        // Debugging statement
+        console.log('Players after update:', players);
+
+        localStorage.setItem('players', JSON.stringify(players));
+    } else {
+        console.error('Winner or loser not found in players:', winner, loser);
+    }
+}
 
 
 
