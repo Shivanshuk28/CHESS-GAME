@@ -1,6 +1,7 @@
 
 
 
+
 // Inserting the Images
 function insertImage() {
 
@@ -576,6 +577,122 @@ document.querySelectorAll('.box').forEach(item => {
     })
 
 })
+
+
+
+
+
+// Moving the element
+document.querySelectorAll('.box').forEach(item => {
+
+    item.addEventListener('click', function () {
+
+
+        if (item.style.backgroundColor == 'pink') {
+
+            pinkId = item.id
+            pinkText = item.innerText
+
+            document.querySelectorAll('.box').forEach(item2 => {
+
+                item2.addEventListener('click', function () {
+
+                    getId = item2.id
+                    arr = Array.from(getId)
+                    arr.shift()
+                    aside = eval(arr.pop())
+                    arr.push('0')
+                    aup = eval(arr.join(''))
+                    a = aside + aup
+
+                    if (item2.style.backgroundColor == 'green' && item2.innerText.length == 0) {
+
+                        if (pinkText == `Wpawn` && aup == 800) {
+
+                            document.getElementById(`b${a}`).innerText = 'Wqueen'
+                            document.getElementById(pinkId).innerText = ''
+                            coloring()
+                            insertImage()
+
+                        }
+                        else if (pinkText == `Bpawn` && aup == 100) {
+
+                            document.getElementById(`b${a}`).innerText = 'Bqueen'
+                            document.getElementById(pinkId).innerText = ''
+                            coloring()
+                            insertImage()
+
+                        }
+                        else {
+
+
+
+                            document.getElementById(pinkId).innerText = ''
+                            item2.innerText = pinkText
+                            coloring()
+                            insertImage()
+                        }
+
+                    }
+
+                    else if (item2.style.backgroundColor == 'aqua') {
+                        if(item2.id=='b103'){
+                            document.getElementById('b101').innerText = ''
+                            document.getElementById('b102').innerText = ''
+                            document.getElementById('b103').innerText = 'Wking'
+                            document.getElementById('b104').innerText = 'Wrook'
+                            document.getElementById('b105').innerText = ''
+                            document.getElementById(pinkId).innerText = ''
+                            whiteCastleChance=false
+                            coloring()
+                            insertImage()
+                            
+                        }
+                        else if(item2.id=='b107'){
+                            document.getElementById('b105').innerText = ''
+                            document.getElementById('b106').innerText = 'Wrook'
+                            document.getElementById('b107').innerText = 'Wking'
+                            document.getElementById('b108').innerText = ''
+                            document.getElementById(pinkId).innerText = ''
+                            whiteCastleChance=false
+                            coloring()
+                            insertImage()
+
+                        }
+                        else if(item2.id=='b803'){
+                            document.getElementById('b801').innerText = ''
+                            document.getElementById('b802').innerText = ''
+                            document.getElementById('b803').innerText = 'Bking'
+                            document.getElementById('b804').innerText = 'Brook'
+                            document.getElementById('b805').innerText = ''
+                            document.getElementById(pinkId).innerText = ''
+                            blackCastleChance=false
+                            coloring()
+                            insertImage()
+                            
+                        }
+                        else if(item2.id=='b807'){
+                            document.getElementById('b805').innerText = ''
+                            document.getElementById('b806').innerText = 'Brook'
+                            document.getElementById('b807').innerText = 'Bking'
+                            document.getElementById('b808').innerText = ''
+                            document.getElementById(pinkId).innerText = ''
+                            blackCastleChance=false
+                            coloring()
+                            insertImage()
+
+                        }
+                    }
+
+                })
+            })
+
+        }
+
+    })
+
+})
+
 
 
 
