@@ -693,6 +693,15 @@ document.querySelectorAll('.box').forEach(item => {
 
 })
 
-
+// Prvents from selecting multiple elements
+z = 0
+document.querySelectorAll('.box').forEach(ee => {
+    ee.addEventListener('click', function () {
+        z = z + 1
+        if (z % 2 == 0 && ee.style.backgroundColor !== 'green' && ee.style.backgroundColor !== 'aqua') {
+            coloring()
+        }
+    })
+})
 
 
