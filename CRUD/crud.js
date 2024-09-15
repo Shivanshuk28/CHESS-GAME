@@ -1,11 +1,4 @@
 
-
-
-
-
-
-
-
 // Save game state to local storage
 function saveGameState(gameName) {
     const gameState = {
