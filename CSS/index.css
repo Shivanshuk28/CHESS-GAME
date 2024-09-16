@@ -1,0 +1,74 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* //all text in the file should be white */
+    /* color: white; */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 17%; /* Adjust this value to move the video down */
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(48, 30, 48, 0.5); /* Semi-transparent overlay */
+    /* background-color: rgba(158, 94, 94, 0.5); */
+    color: white;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#playerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    max-width: 400px;
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}

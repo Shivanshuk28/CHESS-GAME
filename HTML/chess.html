@@ -15,8 +15,8 @@
     <h1>Chess</h1>
     <h2 id="tog"></h2>
 
-    <div class="main-board">
-        <div>
+    <div class="main-container">
+        <div class="chess-board">
             <ul>
                 <div class="divv" id="row8">
                     <li class="box" id="b801">Brook</li>
@@ -101,9 +101,8 @@
                 </div>
             </ul>
         </div>
-        <div>
-            <!-- load game , delete game, save game make buttons-->
-
+        <div class="game-controls">
+            <h3>Game Management</h3>
             <input type="text" id="saveGameName" placeholder="Enter game name to save" />
             <button id="saveGameButton">Save Game</button>
 
@@ -112,12 +111,9 @@
             <button id="deleteGameButton">Delete Game</button>
             <button id="newGameButton">New Game</button>
         </div>
-        
     </div>
     <script src="../JS/chess.js"></script>
     <script src="../CRUD/crud.js"></script>
 </body>
-
-<script></script>
 
 </html>
