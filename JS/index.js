@@ -12,5 +12,5 @@ document.getElementById('playerForm').addEventListener('submit', function(event)
     localStorage.setItem('player1', player1);
     localStorage.setItem('player2', player2);
 
-    window.location.href = 'chess.html';
+    window.location.href = 'html/chess.html';
 });
