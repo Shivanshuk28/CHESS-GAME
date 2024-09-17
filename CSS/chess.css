@@ -12,9 +12,9 @@ body {
     font-family: Arial, sans-serif;
 }
 
-h1 {
+/* h1 {
     margin: 20px 0;
-}
+} */
 
 .main-container {
     display: flex;
@@ -127,3 +127,59 @@ li {
         width: 7vw;
     }
 }
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 45px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#leaderButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: auto;
+}
+
+#leaderButton:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .navbar h1 {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+    }
+
+    #leaderButton {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* ... rest of the existing CSS ... */
+
+/* Remove or comment out the previous #leaderButton styles */
