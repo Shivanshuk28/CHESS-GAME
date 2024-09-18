@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Jahid Khan" />
     <link rel="stylesheet" href="../CSS/chess.css" />
-
     <title>Chess</title>
+    
 </head>
 
 <body>
     <div class="navbar">
         <h1>CHESS</h1>
-        <button id="leaderButton">Leader</button>
+        <a href="#leaderboard" id="leaderButton">LeaderBoard</a>
     </div>
 
     <h2 id="tog"></h2>
@@ -116,8 +116,26 @@
             <button id="newGameButton">New Game</button>
         </div>
     </div>
+    <div id="leaderboard" class="leaderboard">
+        <h2>Leaderboard</h2>
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player Name</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboardBody">
+                <!-- Leaderboard entries will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
     <script src="../JS/chess.js"></script>
     <script src="../CRUD/crud.js"></script>
+    <script>
+        
+    </script>
 </body>
 
 </html>

@@ -1,3 +1,5 @@
+
+//initializing the players
 const player1 = localStorage.getItem('player1');
 const player2 = localStorage.getItem('player2');
 
@@ -53,6 +55,40 @@ function updateRatings(winner, loser) {
     }
 }
 
+
+//// Function to update the leaderboard
+function updateLeaderboard() {
+    const leaderboardBody = document.getElementById('leaderboardBody');
+    leaderboardBody.innerHTML = ''; // Clear existing entries
+
+    // Get players from local storage
+    const players = JSON.parse(localStorage.getItem('players')) || {};
+
+    // Sort players by rating
+    const sortedPlayers = Object.entries(players)
+        .sort((a, b) => b[1].rating - a[1].rating);
+
+    // Add players to the leaderboard
+    sortedPlayers.forEach((player, index) => {
+        const row = leaderboardBody.insertRow();
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${player[0]}</td>
+            <td>${player[1].rating}</td>
+        `;
+    });
+}
+
+// Update leaderboard when the page loads
+document.addEventListener('DOMContentLoaded', updateLeaderboard);
+
+// Smooth scroll to leaderboard when clicking the Leader button
+document.getElementById('leaderButton').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+    });
+});
 
 
 
