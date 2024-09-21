@@ -1,3 +1,43 @@
+// Add these variables at the top of the file
+let player1Time = 600; // 10 minutes in seconds
+let player2Time = 600;
+let currentInterval;
+
+// Add this function to update the timer display
+function updateTimerDisplay(player, time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    const displayTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById(`${player}-timer`).textContent = displayTime;
+}
+
+// Add this function to start the timer for the current player
+function startTimer(player) {
+    if (currentInterval) {
+        clearInterval(currentInterval);
+    }
+    currentInterval = setInterval(() => {
+        if (player === 'player1') {
+            player1Time--;
+            updateTimerDisplay('player1', player1Time);
+            if (player1Time <= 0) {
+                clearInterval(currentInterval);
+                alert(`${player2} wins on time!`);
+                updateRatings(player2, player1);
+                location.reload();
+            }
+        } else {
+            player2Time--;
+            updateTimerDisplay('player2', player2Time);
+            if (player2Time <= 0) {
+                clearInterval(currentInterval);
+                alert(`${player1} wins on time!`);
+                updateRatings(player1, player2);
+                location.reload();
+            }
+        }
+    }, 1000);
+}
 
 //initializing the players
 const player1 = localStorage.getItem('player1');
@@ -27,6 +67,17 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePlayer(player1);
     initializePlayer(player2);
     
+    // Set player names in the timer display
+    document.getElementById('player1-name').textContent = player1;
+    document.getElementById('player2-name').textContent = player2;
+
+    // Initialize timer displays
+    updateTimerDisplay('player1', player1Time);
+    updateTimerDisplay('player2', player2Time);
+
+    // Start the timer for the first player
+    startTimer('player1');
+
 });
 
 
@@ -53,6 +104,9 @@ function updateRatings(winner, loser) {
     } else {
         console.error('Winner or loser not found in players:', winner, loser);
     }
+
+    // Stop the timer
+    clearInterval(currentInterval);
 }
 
 
@@ -207,10 +261,12 @@ document.querySelectorAll('.box').forEach(item => {
         // To delete the opposite element
 
         if (item.style.backgroundColor == 'green' && item.innerText.length == 0) {
-            tog = tog + 1
+            tog = tog + 1;
+            // Switch the timer to the other player
+            startTimer(tog % 2 !== 0 ? 'player1' : 'player2');
         }
         else if (item.style.backgroundColor == 'aqua' && item.innerText.length == 0) {
-            tog = tog + 1
+            tog = tog + 1;
         }
 
         else if (item.style.backgroundColor == 'green' && item.innerText.length !== 0) {
@@ -224,7 +280,9 @@ document.querySelectorAll('.box').forEach(item => {
                     item.innerText = pinkText
                     coloring()
                     insertImage()
-                    tog = tog + 1
+                    tog = tog + 1;
+                    // Switch the timer to the other player
+                    startTimer(tog % 2 !== 0 ? 'player1' : 'player2');
 
                 }
             })
