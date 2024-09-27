@@ -30,6 +30,13 @@ body {
 
 .chess-board {
     margin-right: 0;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .game-controls {
@@ -121,12 +128,15 @@ li {
 
 @media (max-width: 650px) {
     .box {
-        width: 11vw;
-        height: 11vw;
+        width: 12vw;
+        height: 12vw;
+        min-width: 40px;
+        min-height: 40px;
     }
 
     .allimg {
-        width: 7vw;
+        width: 10vw;
+        min-width: 30px;
     }
 }
 
