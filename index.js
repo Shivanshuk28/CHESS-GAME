@@ -14,5 +14,5 @@ document.getElementById('playerForm').addEventListener('submit', function(e) {
     localStorage.setItem('player2', player2);
     localStorage.setItem('gameTime', gameTime);
 
-    window.location.href = 'HTML/chess.html';
+    window.location.href = 'chess.html';
 });
