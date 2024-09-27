@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: rgb(184, 182, 182);
+    background-color:#f7f4e9;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,15 +21,20 @@ body {
 .main-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+.chess-and-timers {
+    display: flex;
+    position: relative;
+}
+
 .chess-board {
-    margin-right: 0;
+    margin-right: 20px;
     touch-action: manipulation;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -39,12 +44,42 @@ body {
     user-select: none;
 }
 
+.timers-container {
+    position: absolute;
+    right: -220px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.player-timer {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+}
+
+.player2-timer {
+    align-self: flex-start;
+}
+
+.player1-timer {
+    align-self: flex-end;
+}
+
 .game-controls {
     width: 300px;
     padding: 30px;
     background-color: #f0f0f0;
     border-radius: 8px;
-    align-self: center;
+    margin-left: 20px;
+    margin-top: 70px;
 }
 
 .game-controls h3 {
@@ -93,6 +128,7 @@ li {
     margin: .5px;
     width: 75px;
     height: 75px;
+    touch-action: manipulation;
 }
 
 #tog {
@@ -113,16 +149,28 @@ li {
     .main-container {
         flex-direction: column;
         align-items: center;
-        padding: 0;
     }
 
-    .chess-board {
-        margin-bottom: 30px;
+    .chess-and-timers {
+        margin-bottom: 20px;
+    }
+
+    .timers-container {
+        position: static;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .player-timer {
+        width: 48%;
     }
 
     .game-controls {
         width: 100%;
-        max-width: 350px;
+        max-width: 600px;
+        margin-left: 0;
     }
 }
 
@@ -137,6 +185,8 @@ li {
     .allimg {
         width: 10vw;
         min-width: 30px;
+        max-width: 100%;
+        height: auto;
     }
 }
 
@@ -145,18 +195,27 @@ li {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 20px;
-    background-color: #706767;
+    padding: 10px 20px;
+    background-color: #2d4b27;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
+}
+
+.chess-icon {
+    width: 32px;
+    height: 32px;
+    fill: white;
+    margin-right: 10px;
 }
 
 .navbar h1 {
     margin: 0;
     font-size: 45px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    font-family: 'Brush Script MT', cursive;
+    font-weight: bold;
+    color: #ffb300;
+    flex-grow: 1;
+    text-align: center;
 }
 
 #leaderButton {
@@ -167,7 +226,7 @@ li {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-left: auto;
+    text-decoration: none;
 }
 
 #leaderButton:hover {
@@ -180,28 +239,47 @@ li {
         padding: 10px;
     }
 
+    .chess-icon {
+        margin-bottom: 10px;
+    }
+
     .navbar h1 {
-        position: static;
-        transform: none;
         margin-bottom: 10px;
     }
 
     #leaderButton {
         width: 100%;
-        margin-left: 0;
     }
 }
 
+.timer-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
 
+.player-timer {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+}
 
+.player2-timer {
+    align-self: flex-start;
+}
 
+.player1-timer {
+    align-self: flex-end;
+}
 
 #leaderButton {
     text-decoration: none;
     color: white;
 }
-
-
 
 .leaderboard {
     width: 100%;
@@ -241,4 +319,59 @@ li {
 #player-icon {
     font-size: 28px;
     margin-right: 5px;
+}
+
+@media (max-width: 1400px) {
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chess-and-timers {
+        margin-bottom: 20px;
+    }
+
+    .timers-container {
+        position: static;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .player-timer {
+        width: 48%;
+    }
+
+    .game-controls {
+        width: 100%;
+        max-width: 600px;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .chess-and-timers {
+        flex-direction: column;
+    }
+
+    .chess-board {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .timers-container {
+        flex-direction: column;
+    }
+
+    .player-timer {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .player-timer {
+        font-size: 18px;
+    }
 }

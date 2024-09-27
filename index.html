@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chess Game</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <div class="video-background">
@@ -22,9 +22,18 @@
             <label for="player2">Player 2 Name:</label>
             <input type="text" id="player2" name="player2" required>
             <br>
+            <label for="gameTime">Select Game Time:</label>
+            <select id="gameTime" name="gameTime" required>
+                <option value="1200">20 minutes</option>
+                <option value="600">10 minutes</option>
+                <option value="300">5 minutes</option>
+                <option value="120">2 minutes</option>
+                <option value="60">1 minutes</option>
+            </select>
+            <br>
             <button type="submit">Start Game</button>
         </form>
     </div>
-    <script src="index.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

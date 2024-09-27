@@ -1,10 +1,42 @@
-// Add this function at the beginning of your file
-function addClickOrTouchEvent(element, handler) {
-    element.addEventListener('click', handler);
-    element.addEventListener('touchstart', function(e) {
-        e.preventDefault(); // Prevent zooming on double-tap
-        handler.call(this, e);
-    }, { passive: false });
+// Modify these variables at the top of the file
+let player1Time;
+let player2Time;
+let currentInterval;
+
+// Add this function to update the timer display
+function updateTimerDisplay(player, time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    const displayTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById(`${player}-timer`).textContent = displayTime;
+}
+
+// Add this function to start the timer for the current player
+function startTimer(player) {
+    if (currentInterval) {
+        clearInterval(currentInterval);
+    }
+    currentInterval = setInterval(() => {
+        if (player === 'player1') {
+            player1Time--;
+            updateTimerDisplay('player1', player1Time);
+            if (player1Time <= 0) {
+                clearInterval(currentInterval);
+                alert(`${player2} wins on time!`);
+                updateRatings(player2, player1);
+                location.reload();
+            }
+        } else {
+            player2Time--;
+            updateTimerDisplay('player2', player2Time);
+            if (player2Time <= 0) {
+                clearInterval(currentInterval);
+                alert(`${player1} wins on time!`);
+                updateRatings(player1, player2);
+                location.reload();
+            }
+        }
+    }, 1000);
 }
 
 //initializing the players
@@ -12,7 +44,11 @@ const player1 = localStorage.getItem('player1');
 const player2 = localStorage.getItem('player2');
 
 document.addEventListener('DOMContentLoaded', function() {
-    
+    // Get the game time from localStorage
+    const gameTime = parseInt(localStorage.getItem('gameTime')) || 600; // Default to 10 minutes if not set
+    player1Time = gameTime;
+    player2Time = gameTime;
+
     let tog = 1; // Initialize the toggle variable
 
     // Function to update the turn indicator
@@ -35,6 +71,17 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePlayer(player1);
     initializePlayer(player2);
     
+    // Set player names in the timer display
+    document.getElementById('player1-name').textContent = player1;
+    document.getElementById('player2-name').textContent = player2;
+
+    // Initialize timer displays
+    updateTimerDisplay('player1', player1Time);
+    updateTimerDisplay('player2', player2Time);
+
+    // Start the timer for the first player
+    startTimer('player1');
+
 });
 
 
@@ -61,6 +108,9 @@ function updateRatings(winner, loser) {
     } else {
         console.error('Winner or loser not found in players:', winner, loser);
     }
+
+    // Stop the timer
+    clearInterval(currentInterval);
 }
 
 
@@ -159,12 +209,38 @@ function reddish() {
         if (i1.style.backgroundColor == 'pink') {
 
             document.querySelectorAll('.box').forEach(i2 => {
-                addClickOrTouchEvent(i2, function() {
-                    // Your existing code for handling moves
-                });
-            });
+
+                if (i2.style.backgroundColor == 'green' && i2.innerText.length !== 0) {
+
+
+                    greenText = i2.innerText
+
+                    pinkText = i1.innerText
+
+                    pinkColor = ((Array.from(pinkText)).shift()).toString()
+                    greenColor = ((Array.from(greenText)).shift()).toString()
+
+                    getId = i2.id
+                    arr = Array.from(getId)
+                    arr.shift()
+                    aside = eval(arr.pop())
+                    aup = eval(arr.shift())
+                    a = aside + aup
+
+                    if (a % 2 == 0 && pinkColor == greenColor) {
+                        i2.style.backgroundColor = 'rgb(240, 201, 150)'
+                    }
+                    if (a % 2 !== 0 && pinkColor == greenColor) {
+                        i2.style.backgroundColor = 'rgb(100, 75, 43)'
+                    }
+
+                    // if (pinkColor == greenColor) {
+                    //     i2.style.backgroundColor = 'rgb(253, 60, 60)'
+                    // }
+                }
+            })
         }
-    });
+    })
 }
 
 
@@ -184,15 +260,17 @@ document.querySelectorAll('.box').forEach(item => {
 
 
 
-    addClickOrTouchEvent(item, function () {
+    item.addEventListener('click', function () {
 
         // To delete the opposite element
 
         if (item.style.backgroundColor == 'green' && item.innerText.length == 0) {
-            tog = tog + 1
+            tog = tog + 1;
+            // Switch the timer to the other player
+            startTimer(tog % 2 !== 0 ? 'player1' : 'player2');
         }
         else if (item.style.backgroundColor == 'aqua' && item.innerText.length == 0) {
-            tog = tog + 1
+            tog = tog + 1;
         }
 
         else if (item.style.backgroundColor == 'green' && item.innerText.length !== 0) {
@@ -206,7 +284,9 @@ document.querySelectorAll('.box').forEach(item => {
                     item.innerText = pinkText
                     coloring()
                     insertImage()
-                    tog = tog + 1
+                    tog = tog + 1;
+                    // Switch the timer to the other player
+                    startTimer(tog % 2 !== 0 ? 'player1' : 'player2');
 
                 }
             })
@@ -657,7 +737,7 @@ document.querySelectorAll('.box').forEach(item => {
 // Moving the element
 document.querySelectorAll('.box').forEach(item => {
 
-    addClickOrTouchEvent(item, function () {
+    item.addEventListener('click', function () {
 
 
         if (item.style.backgroundColor == 'pink') {
@@ -667,7 +747,7 @@ document.querySelectorAll('.box').forEach(item => {
 
             document.querySelectorAll('.box').forEach(item2 => {
 
-                addClickOrTouchEvent(item2, function () {
+                item2.addEventListener('click', function () {
 
                     getId = item2.id
                     arr = Array.from(getId)
@@ -766,16 +846,14 @@ document.querySelectorAll('.box').forEach(item => {
 })
 
 // Prvents from selecting multiple elements
-let lastClickedElement = null;
+z = 0
 document.querySelectorAll('.box').forEach(ee => {
-    addClickOrTouchEvent(ee, function () {
-        if (lastClickedElement === this) {
-            coloring();
-            lastClickedElement = null;
-        } else {
-            lastClickedElement = this;
+    ee.addEventListener('click', function () {
+        z = z + 1
+        if (z % 2 == 0 && ee.style.backgroundColor !== 'green' && ee.style.backgroundColor !== 'aqua') {
+            coloring()
         }
-    });
-});
+    })
+})
 
 
