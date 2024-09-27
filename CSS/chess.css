@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: rgb(184, 182, 182);
+    background-color:#f7f4e9;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,6 +79,7 @@ body {
     background-color: #f0f0f0;
     border-radius: 8px;
     margin-left: 20px;
+    margin-top: 70px;
 }
 
 .game-controls h3 {
@@ -194,18 +195,27 @@ li {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 20px;
-    background-color: #706767;
+    padding: 10px 20px;
+    background-color: #2d4b27;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
+}
+
+.chess-icon {
+    width: 32px;
+    height: 32px;
+    fill: white;
+    margin-right: 10px;
 }
 
 .navbar h1 {
     margin: 0;
     font-size: 45px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    font-family: 'Brush Script MT', cursive;
+    font-weight: bold;
+    color: #ffb300;
+    flex-grow: 1;
+    text-align: center;
 }
 
 #leaderButton {
@@ -216,7 +226,7 @@ li {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-left: auto;
+    text-decoration: none;
 }
 
 #leaderButton:hover {
@@ -229,15 +239,16 @@ li {
         padding: 10px;
     }
 
+    .chess-icon {
+        margin-bottom: 10px;
+    }
+
     .navbar h1 {
-        position: static;
-        transform: none;
         margin-bottom: 10px;
     }
 
     #leaderButton {
         width: 100%;
-        margin-left: 0;
     }
 }
 

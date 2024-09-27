@@ -1,6 +1,6 @@
-// Add these variables at the top of the file
-let player1Time = 600; // 10 minutes in seconds
-let player2Time = 600;
+// Modify these variables at the top of the file
+let player1Time;
+let player2Time;
 let currentInterval;
 
 // Add this function to update the timer display
@@ -44,7 +44,11 @@ const player1 = localStorage.getItem('player1');
 const player2 = localStorage.getItem('player2');
 
 document.addEventListener('DOMContentLoaded', function() {
-    
+    // Get the game time from localStorage
+    const gameTime = parseInt(localStorage.getItem('gameTime')) || 600; // Default to 10 minutes if not set
+    player1Time = gameTime;
+    player2Time = gameTime;
+
     let tog = 1; // Initialize the toggle variable
 
     // Function to update the turn indicator
